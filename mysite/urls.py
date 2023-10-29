@@ -25,8 +25,10 @@ urlpatterns = [
 
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/album_list/')), 
     path('admin/', admin.site.urls),
     path('', include('label_list.urls')),  # 'label_list'アプリのURL設定をインクルード
 ]
