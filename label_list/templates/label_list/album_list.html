@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h1 class="mb-4">Disc List</h1>
+    
+    <form method="get" action="" class="form-inline mb-4">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Search...">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if albums %}
+    <div class="table-responsive"> <!-- 追加したレスポンシブコンテナ -->
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Catalog Number</th>
+                    <th scope="col">Artist</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Format</th>
+                    <th scope="col">Release Date</th>
+                    <th scope="col">Label</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for album in albums %}
+                <tr>
+                    <td>{{ album.catalog_number }}</td>
+                    <td>
+                        {% if album.artist %}
+                            {{ album.artist.artist }}
+                        {% else %}
+                            Unknown
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'album_detail' album.id %}?search={{ search_term }}">{{ album.title }}</a></td>
+                    <td>
+                        {% if album.format %}
+                            {{ album.format.format }}
+                        {% else %}
+                            Unknown
+                        {% endif %}
+                    </td>
+                    <td>{{ album.release_date }}</td>
+                    <td>
+                        {% if album.label %}
+                            {{ album.label.label }}
+                        {% else %}
+                            Unknown
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> <!-- レスポンシブコンテナの終了 -->
+    {% else %}
+    <div class="alert alert-info">
+        No albums found.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
