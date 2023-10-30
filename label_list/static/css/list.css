@@ -1,0 +1,7 @@
+/* サイトタイトルのスタイル */
+.site-title {
+    background-color: #343a40; /* Bootstrapのダークグレート統一*/
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
