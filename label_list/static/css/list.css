@@ -5,3 +5,28 @@
     padding: 10px 0;
     text-align: center;
 }
+
+/* アルバム画像の最大サイズを制限 */
+.img-fluid {
+    max-width: 250px; 
+    height: auto;
+    margin: 0 auto; /* 画像を中央寄せ */
+    display: block;
+}
+
+/* 画像がない場合のスタイル */
+.no-image {
+    width: 250px; /* 画像と同じサイズで設定 */
+    height: 250px; /* 画像と同じサイズで設定 */
+    line-height: 250px; /* テキストを垂直方向中央に配置 */
+    margin: 0 auto; /* ボックスを中央寄せ */
+    color: #888; /* テキストの色を灰色に */
+    font-size: 1.5rem; /* フォントサイズを調整 */
+    font-weight: bold; /* フォントを太く */
+    border: 1px solid #ddd; /* 枠線を追加 */
+    text-align: center; /* テキストを中央揃えに */
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* このクラス名をHTMLの該当部分に追加してください */

@@ -37,6 +37,8 @@ class Album(models.Model):
     spotify_url = models.URLField(blank=True)
     apple_music_url = models.URLField(blank=True)
     tower_records_music_url = models.URLField(blank=True)
+
+    image = models.ImageField(upload_to='album_images/', blank=True, null=True) # 新しい画像フィールドを追加
     
 
     class Meta:

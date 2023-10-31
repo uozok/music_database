@@ -2,47 +2,57 @@
 
 {% block content %}
 <div class="container mt-4 mb-4">
-
+  <div class="row">
     <!-- タイトルとアーティスト名 -->
-    <h2>{{ album.title }}</h2>
-    <h3>{% if album.artist %}{{ album.artist.artist }}{% else %}'Unknown'{% endif %}</h3>
+    <div class="col-lg-6">
+      <h2>{{ album.title }}</h2>
+      <h3>{% if album.artist %}{{ album.artist.artist }}{% else %}'Unknown Artist'{% endif %}</h3>
+    </div>
+    
+    <!-- 画像の表示 -->
+    <div class="col-lg-6">
+      {% if album.image %}
+      <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid">
+      {% else %}
+      <div class="border p-5">
+          no image
+      </div>
+      {% endif %}
+    </div>
+  </div>
 
-    <hr> <!-- 区切り線 -->
+  <hr>
 
-    <!-- 詳細情報 -->
+  <!-- 詳細情報 -->
+  <div class="mt-4">
     <h4>詳細情報</h4>
-
-    <!-- 項目：内容の形式で各情報を表示 -->
     <p><strong>カタログ番号:</strong> {{ album.catalog_number }}</p>
-    <p><strong>アーティスト:</strong> {% if album.artist %}{{ album.artist.artist }}{% else %}'Unknown'{% endif %}</p>
-    <p><strong>フォーマット:</strong> {% if album.format %}{{ album.format.format }}{% else %}'Unknown'{% endif %}</p>
+    <p><strong>フォーマット:</strong> {% if album.format %}{{ album.format.format }}{% else %}'Unknown Format'{% endif %}</p>
     <p><strong>発売日:</strong> {{ album.release_date }}</p>
-    <p><strong>レーベル:</strong> {% if album.label %}{{ album.label.label }}{% else %}'Unknown'{% endif %}</p>
+    <p><strong>レーベル:</strong> {% if album.label %}{{ album.label.label }}{% else %}'Unknown Label'{% endif %}</p>
     <p><strong>備考:</strong> {{ album.notes }}</p>
-
-    <!-- 追加したフィールドの情報を表示 -->
-    <p><strong>収録曲:</strong> {% if album.songs %}{{ album.songs }}{% else %}''{% endif %}</p>
-    <p><strong>演奏者:</strong> {% if album.performers %}{{ album.performers }}{% else %}''{% endif %}</p>
-    <p><strong>クレジット:</strong> {% if album.credits %}{{ album.credits }}{% else %}''{% endif %}</p>
-
+    <p><strong>収録曲:</strong> {% if album.songs %}{{ album.songs }}{% else %}'No Songs Listed'{% endif %}</p>
+    <p><strong>演奏者:</strong> {% if album.performers %}{{ album.performers }}{% else %}'Unknown Performers'{% endif %}</p>
+    <p><strong>クレジット:</strong> {% if album.credits %}{{ album.credits }}{% else %}'No Credits Listed'{% endif %}</p>
+    <hr>
     {% if album.youtube_url %}
     <p><strong>YouTube:</strong> <a href="{{ album.youtube_url }}" target="_blank">Click Here for YouTube</a></p>
     {% endif %}
-
     {% if album.spotify_url %}
     <p><strong>Spotify:</strong> <a href="{{ album.spotify_url }}" target="_blank">Click Here for Spotify</a></p>
     {% endif %}
-
     {% if album.apple_music_url %}
     <p><strong>Apple Music:</strong> <a href="{{ album.apple_music_url }}" target="_blank">Click Here for Apple Music</a></p>
     {% endif %}
-
     {% if album.tower_records_music_url %}
-<p><strong>Tower Records Music:</strong> <a href="{{ album.tower_records_music_url }}" target="_blank">Click Here for Tower Records Music</a></p>
-{% endif %}
+    <p><strong>Tower Records Music:</strong> <a href="{{ album.tower_records_music_url }}" target="_blank">Click Here for Tower Records Music</a></p>
+    {% endif %}
+  </div>
 
-    <!-- 下部にも戻るボタンを追加 -->
+  <!-- 戻るボタン -->
+  <div class="mt-3">
     <a href="{% url 'album_list' %}?search={{ search_term }}">戻る</a>
+  </div>
 
 </div>
 {% endblock %}
