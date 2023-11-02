@@ -2,64 +2,97 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-4">
+<link href="{% static 'css/list.css' %}" rel="stylesheet">
 
-    <h1 class="mb-4 site-title">Tittle Search</h1>
-    
+<!-- site-title-containerをcontainerの外に移動 -->
+<div class="site-title-container">
+    <h1 class="mb-4 site-title"><a href="{% url 'album_list' %}" style="color: white; text-decoration: none;">Post Trax</a></h1>
+</div>
+
+<div class="container mt-4">
     <form method="get" action="" class="form-inline mb-4">
-        <input type="text" name="search" class="form-control mr-2" placeholder="Search...">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Artist,Title...">
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
+    
+
+</div>
+        
 
     {% if albums %}
-    <div class="table-responsive"> <!-- 追加したレスポンシブコンテナ -->
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Catalog Number</th>
-                    <th scope="col">Artist</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Format</th>
-                    <th scope="col">Release Date</th>
-                    <th scope="col">Label</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for album in albums %}
-                <tr>
-                    <td>{{ album.catalog_number }}</td>
-                    <td>
-                        {% if album.artist %}
-                            {{ album.artist.artist }}
-                        {% else %}
-                            Unknown
-                        {% endif %}
-                    </td>
-                    <td><a href="{% url 'album_detail' album.id %}?search={{ search_term }}">{{ album.title }}</a></td>
-                    <td>
-                        {% if album.format %}
-                            {{ album.format.format }}
-                        {% else %}
-                            Unknown
-                        {% endif %}
-                    </td>
-                    <td>{{ album.release_date }}</td>
-                    <td>
-                        {% if album.label %}
-                            {{ album.label.label }}
-                        {% else %}
-                            Unknown
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div> <!-- レスポンシブコンテナの終了 -->
+        <!-- スマートフォンビュー -->
+        <div class="d-md-none">
+            {% for album in albums %}
+            <div class="media mb-3">
+                {% if album.image %}
+                    <img src="{{ album.image.url }}" alt="{{ album.title }}" class="mr-3 img-fluid album-table-image">
+                {% else %}
+                    <div class="no-image">No Image</div>
+                {% endif %}
+                <div class="media-body">
+                    <h5 class="mt-0"><a href="{% url 'album_detail' album.id %}">{{ album.title }}</a></h5>
+                    <p>{{ album.artist.artist|default:"Unknown" }}</p>
+                    <p>{{ album.release_date }}</p>
+                    <p>{{ album.label.label|default:"Unknown" }}</p>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+
+        <!-- PCビュー -->
+        <div class="d-none d-md-block">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Catalog Number</th>
+                            <th scope="col">Artist</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Format</th>
+                            <th scope="col">Release Date</th>
+                            <th scope="col">Label</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for album in albums %}
+                        <tr>
+                            <td>
+                                {% if album.image %}
+                                    <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid album-table-image">
+                                {% else %}
+                                    <div class="no-image">No Image</div>
+                                {% endif %}
+                            </td>
+                            <td>{{ album.catalog_number }}</td>
+                            <td>{{ album.artist.artist|default:"Unknown" }}</td>
+                            <td><a href="{% url 'album_detail' album.id %}">{{ album.title }}</a></td>
+                            <td>{{ album.format.format|default:"Unknown" }}</td>
+                            <td>{{ album.release_date }}</td>
+                            <td>{{ album.label.label|default:"Unknown" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+         
     {% else %}
-    <div class="alert alert-info">
-        No albums found.
-    </div>
+        <div class="alert alert-info">No albums found.</div>
     {% endif %}
+
+<div class="container mt-4">
+    <!-- ここからニュースリスト -->
+    <div class="news-list">
+        <p class="news-item"><a href="{% url 'album_list' %}?search=uk+new+wave">シンコーミュージックディスクガイド 『UK New Wave』掲載タイトルを追加しました！</a></p>
+        <p class="news-item"><a href="{% url 'album_list' %}?search=加害妄想">加害妄想 Recordsのリリースを追加しました！</a></p>
+        <!-- 他のニュースアイテムも同様に追加 -->
+    </div>
+    <!-- ここまでニュースリスト -->
+    
+    <!-- 既存のアルバムリストなど -->
 </div>
+
+
 {% endblock %}

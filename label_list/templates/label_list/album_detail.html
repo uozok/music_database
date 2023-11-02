@@ -12,11 +12,9 @@
     <!-- 画像の表示 -->
     <div class="col-lg-6">
       {% if album.image %}
-      <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid">
+        <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid">
       {% else %}
-      <div class="border p-5">
-          no image
-      </div>
+        <div class="no-image">No Image Available</div>
       {% endif %}
     </div>
   </div>

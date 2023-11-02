@@ -1,32 +1,154 @@
-/* サイトタイトルのスタイル */
+/* 既存のスタイル */
 .site-title {
-    background-color: #343a40; /* Bootstrapのダークグレート統一*/
+    background-color: #343a40;
     color: white;
     padding: 10px 0;
     text-align: center;
 }
 
+.album-table-image {
+    max-width: 100px;
+    height: auto;
+    display: block;
+}
+
+.no-image {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    color: #888;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* モバイルビュー用のスタイル */
+@media (max-width: 768px) {
+    .media {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* 中央揃えにする */
+    }
+
+    .media-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .album-table-image,
+    .no-image {
+        width: 100px; /* 画像のサイズ調整 */
+        height: 100px; /* 高さも指定 */
+        margin-right: 15px; /* テキストからの間隔を確保 */
+        display: block; /* ブロックレベル要素にする */
+    }
+}
+
+
+/* PCビュー用のスタイルは変更なし */
+@media (min-width: 769px) {
+    /* 現在のPCビュー用スタイルはそのままにしておきます */
+}
+
 /* アルバム画像の最大サイズを制限 */
 .img-fluid {
-    max-width: 250px; 
+    max-width: 200px; 
     height: auto;
     margin: 0 auto; /* 画像を中央寄せ */
     display: block;
 }
 
-/* 画像がない場合のスタイル */
-.no-image {
-    width: 250px; /* 画像と同じサイズで設定 */
-    height: 250px; /* 画像と同じサイズで設定 */
-    line-height: 250px; /* テキストを垂直方向中央に配置 */
-    margin: 0 auto; /* ボックスを中央寄せ */
-    color: #888; /* テキストの色を灰色に */
-    font-size: 1.5rem; /* フォントサイズを調整 */
-    font-weight: bold; /* フォントを太く */
-    border: 1px solid #ddd; /* 枠線を追加 */
-    text-align: center; /* テキストを中央揃えに */
-    display: table-cell;
-    vertical-align: middle;
+
+/* Topニュース */
+
+.news-list {
+    border-left: 4px solid #343a40; /* Bootstrapのテーマカラー */
+    margin-left: 20px;
+    padding-left: 15px;
 }
 
-/* このクラス名をHTMLの該当部分に追加してください */
+.news-item {
+    position: relative;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.news-item::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #343a40; /* Bootstrapのテーマカラー */
+}
+
+.site-title {
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+/* サイトタイトルの背景がフル幅になるように調整 */
+.site-title-container {
+    width: 100vw; /* ビューポートの幅に基づく幅を設定 */
+    position: relative; /* 必要に応じて */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #343a40; /* ここで背景色を設定 */
+}
+
+
+.footer-link {
+    color: white; /* リンクのテキスト色 */
+    text-decoration: none; /* アンダーラインを消去 */
+}
+
+.footer-link:hover {
+    color: lightgray; /* ホバー時のテキスト色 */
+    text-decoration: underline; /* ホバー時にアンダーラインを表示 */
+}
+
+.footer {
+    padding: 0.5rem 0; /* 上下のパディングを小さくする */
+    margin: 0 auto; /* 必要に応じてマージンを調整 */
+    height: auto; /* 高さを自動に設定 */
+    line-height: normal; /* line-heightを通常の行間に設定 */
+}
+
+/* フッター内の列のスタイリング */
+.footer .row > [class^="col-"] {
+    display: flex;
+    align-items: center; /* 中央揃えにする */
+    justify-content: center; /* コンテンツを中央寄せにする */
+    padding: 0.5rem; /* 内側の余白を調整する */
+    margin: 0; /* 外側の余白をなくす */
+}
+
+/* フッター内のタイトルのスタイリング */
+.footer h5 {
+    margin-bottom: 0; /* 下のマージンをなくす */
+    font-size: 1rem; /* フォントサイズを調整 */
+    line-height: 1; /* 行間を1に設定 */
+}
+
+/* フッター内のリンクのスタイリング */
+.footer a {
+    margin-bottom: 0; /* リンクの下のマージンをなくす */
+    padding: 0; /* パディングをなくす */
+}
+
+/* ソーシャルメディアアイコンのスタイリング */
+.footer .fab {
+    margin-right: 5px; /* アイコン間の余白を設定 */
+}
