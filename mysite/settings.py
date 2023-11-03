@@ -24,6 +24,7 @@ SECRET_KEY = 'django-insecure-xx)fl7=h=a$%kz_cvzlfeey0qfjnze%e*o67(m*!3wsvsu)-+-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+#DEBUG = True
 #デプロイ時には、Falseに変えること。
 #開発時はTrue
 

@@ -3,6 +3,8 @@ from django.db import models
 # Create your models here.
 
 from django.db import models
+from django.conf import settings # news用
+from django.utils import timezone # news用
 
 class Label(models.Model):
     label = models.CharField(max_length=256, unique=True, blank=True)
@@ -47,3 +49,17 @@ class Album(models.Model):
     def __str__(self):
         return f"{self.catalog_number} - {self.artist.artist if self.artist else 'Unknown'} - {self.title}"
 
+#news用
+class NewsPost(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title

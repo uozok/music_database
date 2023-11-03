@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from .models import Album
 from django.db.models import Q
+from .models import Album, NewsPost
 
 def album_list(request):
     search_term = request.GET.get('search', '')
@@ -22,3 +23,7 @@ def album_detail(request, album_id):
     album = get_object_or_404(Album, id=album_id)
     search_term = request.GET.get('search', '')  # 追加
     return render(request, 'label_list/album_detail.html', {'album': album, 'search_term': search_term})  # search_termを追加
+
+def news_list(request):
+    news_posts = NewsPost.objects.filter(published_date__isnull=False).order_by('published_date')
+    return render(request, 'label_list/news_list.html', {'news_posts': news_posts})
