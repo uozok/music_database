@@ -152,3 +152,23 @@
 .footer .fab {
     margin-right: 5px; /* アイコン間の余白を設定 */
 }
+
+/* 全体の背景色 */
+body {
+    background-color: fffff; /* マットな薄い水色 */
+}
+
+/* ヘッダーの背景色 */
+.site-title-container {
+    background-color: white;
+}
+
+/* スマートフォンビューでの間隔調整 */
+@media (max-width: 768px) {
+    .form-control {
+        margin-bottom: 0.5rem;
+    }
+    .btn {
+        width: 100%; /* ボタンを幅いっぱいにする */
+    }
+}

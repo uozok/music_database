@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     {% load static %}
+  
+    <!-- 他のメタタグ... -->
+    <meta property="og:title" content="{% block meta_title %}Music Database{% endblock %}">
+    <meta property="og:description" content="{% block meta_description %}Your source for music information.{% endblock %}">
+    <meta property="og:image" content="{% block meta_image %}{% static 'path/to/default/image.jpg' %}{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>{% block title %}Music Database{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}">
+    <!-- Inline Style for HTML and Body -->
     <style>
         html, body {
             height: 100%;
@@ -17,23 +27,19 @@
         }
         .site-content {
             min-height: 100%;
-            /* Adjust padding to match footer height */
             padding-bottom: 120px;
-            box-sizing: border-box; /* Padding doesn't increase size */
+            box-sizing: border-box;
         }
-        .site-header {
-            width: 100%;
-            background-color: #333; /* Example header background color */
-        }
+
         .footer {
             height: 120px;
             position: relative;
-            margin-top: -120px; /* Negative value of footer height */
+            margin-top: -120px;
             clear: both;
-            background-color: #333; /* Footer background color */
+            background-color: #333;
             color: white;
             text-align: center;
-            line-height: 120px; /* Center text vertically */
+            line-height: 120px;
         }
     </style>
 </head>
@@ -50,21 +56,21 @@
         </main>
     </div>
 
-    <footer class="footer bg-dark text-white py-3">
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h5><a href="{% url 'news_list' %}" class="footer-link text-white">News</a></h5>
+                    <h5><a href="{% url 'news_list' %}" class="footer-link">News</a></h5>
                 </div>
                 <div class="col-md-4">
-                    <h5><a href="#" class="footer-link text-white">About</a></h5>
+                    <h5><a href="#" class="footer-link">About</a></h5>
                 </div>
                 <div class="col-md-4">
-                    <h5><a href="#" class="footer-link text-white">Privacy</a></h5>
+                    <h5><a href="#" class="footer-link">Privacy</a></h5>
                 </div>
                 <div class="col-md-4 text-center">
                     <h5>Follow us</h5>
-                    <a href="#" class="text-white">
+                    <a href="#" class="footer-link">
                         <i class="fab fa-twitter"></i> Twitter
                     </a>
                 </div>

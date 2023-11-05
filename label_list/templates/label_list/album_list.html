@@ -15,7 +15,6 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
     
-
 </div>
         
 
@@ -78,11 +77,9 @@
             </div>
         </div>
          
-    {% else %}
-        <div class="alert alert-info">No albums found.</div>
-    {% endif %}
-
+        {% else %}
+        <!-- No albums found メッセージのスタイル調整 -->
+        <div class="alert alert-info" style="border: none; background-color: transparent; font-weight: normal; color: gray;">Sorry, no results found...</div>
+        {% endif %}
 </div>
-
-
 {% endblock %}
