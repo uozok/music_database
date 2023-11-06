@@ -5,17 +5,18 @@ from .models import Album, NewsPost
 
 def album_list(request):
     search_term = request.GET.get('search', '')
-    albums = Album.objects.none()  # これにより、デフォルトで何も取得しない
-    
-    # 検索ワードが存在する場合のみ、アルバムを検索・フィルタリングする
+    albums = Album.objects.none()  # デフォルトで何も取得しない
+
     if search_term:
         albums = Album.objects.filter(
             Q(title__icontains=search_term) |
             Q(artist__artist__icontains=search_term) |
             Q(label__label__icontains=search_term) |
             Q(format__format__icontains=search_term) |
-            Q(notes__icontains=search_term)  
+            Q(notes__icontains=search_term) |
+            Q(keywords__icontains=search_term)  # keywords フィールドでの検索を追加
         )
+
     return render(request, 'label_list/album_list.html', {'albums': albums, 'search_term': search_term})
 
 def album_detail(request, album_id):

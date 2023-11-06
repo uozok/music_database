@@ -21,7 +21,7 @@ class LabelAdmin(ImportExportModelAdmin):
 
 @admin.register(Album)
 class AlbumAdmin(ImportExportModelAdmin):
-    list_display = ['id', 'title', 'artist', 'format', 'label', 'catalog_number', 'release_date']
+    list_display = ['id', 'title', 'artist', 'format', 'label', 'catalog_number', 'release_date', 'credits', 'keywords']
 
 class NewsPostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'published_date')  # 一覧に表示するフィールド

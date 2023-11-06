@@ -35,6 +35,7 @@ class Album(models.Model):
     songs = models.TextField(blank=True)  # 収録曲
     performers = models.TextField(blank=True)  # 演奏者
     credits = models.TextField(blank=True)  # クレジット
+    keywords = models.TextField(blank=True)  # 追加するkeywordsフィールド
     youtube_url = models.URLField(blank=True)
     spotify_url = models.URLField(blank=True)
     apple_music_url = models.URLField(blank=True)
