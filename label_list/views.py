@@ -3,8 +3,19 @@ from .models import Album
 from django.db.models import Q
 from .models import Album, NewsPost
 
+
 def album_list(request):
-    search_term = request.GET.get('search', '')
+    # HTTP_REFERERが存在し、それがアルバムの詳細ページからのものであれば、
+    # セッションから検索ワードを取得する。
+    if 'HTTP_REFERER' in request.META and '/album/' in request.META['HTTP_REFERER']:
+        search_term = request.session.get('search_term', '')
+    else:
+        # リファラーがアルバム詳細ページでない場合、またはHTTP_REFERERがない場合、
+        # GETリクエストから検索ワードを取得する。
+        search_term = request.GET.get('search', '')
+        # 取得した検索ワードをセッションに保存する。
+        request.session['search_term'] = search_term
+
     albums = Album.objects.none()  # デフォルトで何も取得しない
 
     if search_term:
@@ -14,10 +25,13 @@ def album_list(request):
             Q(label__label__icontains=search_term) |
             Q(format__format__icontains=search_term) |
             Q(notes__icontains=search_term) |
-            Q(keywords__icontains=search_term)  # keywords フィールドでの検索を追加
+            Q(keywords__icontains=search_term) |
+            Q(songs__icontains=search_term)  # 収録曲での検索を追加
+         
         )
 
     return render(request, 'label_list/album_list.html', {'albums': albums, 'search_term': search_term})
+
 
 def album_detail(request, album_id):
     album = get_object_or_404(Album, id=album_id)
