@@ -11,9 +11,8 @@ def album_list(request):
         search_term = request.GET.get('search', '')
         request.session['search_term'] = search_term
 
-    albums = Album.objects.all()  # 最初に全アルバムを取得
-
     if search_term:
+        albums = Album.objects.all()
         query = None
         for term in search_term.split():
             q = Q(title__icontains=term) | \
@@ -22,16 +21,19 @@ def album_list(request):
                 Q(format__format__icontains=term) | \
                 Q(notes__icontains=term) | \
                 Q(keywords__icontains=term) | \
-                Q(songs__icontains=term)  # 収録曲での検索を追加
+                Q(songs__icontains=term)
 
             if query is None:
                 query = q
             else:
-                query = query & q  # AND 条件でクエリを連結
+                query = query & q
 
         albums = albums.filter(query) if query else albums
+    else:
+        albums = Album.objects.none()  # 検索語がない場合は何も取得しない
 
     return render(request, 'label_list/album_list.html', {'albums': albums, 'search_term': search_term})
+
 
 
 def album_detail(request, album_id):
