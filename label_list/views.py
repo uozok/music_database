@@ -5,30 +5,31 @@ from .models import Album, NewsPost
 
 
 def album_list(request):
-    # HTTP_REFERERが存在し、それがアルバムの詳細ページからのものであれば、
-    # セッションから検索ワードを取得する。
     if 'HTTP_REFERER' in request.META and '/album/' in request.META['HTTP_REFERER']:
         search_term = request.session.get('search_term', '')
     else:
-        # リファラーがアルバム詳細ページでない場合、またはHTTP_REFERERがない場合、
-        # GETリクエストから検索ワードを取得する。
         search_term = request.GET.get('search', '')
-        # 取得した検索ワードをセッションに保存する。
         request.session['search_term'] = search_term
 
-    albums = Album.objects.none()  # デフォルトで何も取得しない
+    albums = Album.objects.all()  # 最初に全アルバムを取得
 
     if search_term:
-        albums = Album.objects.filter(
-            Q(title__icontains=search_term) |
-            Q(artist__artist__icontains=search_term) |
-            Q(label__label__icontains=search_term) |
-            Q(format__format__icontains=search_term) |
-            Q(notes__icontains=search_term) |
-            Q(keywords__icontains=search_term) |
-            Q(songs__icontains=search_term)  # 収録曲での検索を追加
-         
-        )
+        query = None
+        for term in search_term.split():
+            q = Q(title__icontains=term) | \
+                Q(artist__artist__icontains=term) | \
+                Q(label__label__icontains=term) | \
+                Q(format__format__icontains=term) | \
+                Q(notes__icontains=term) | \
+                Q(keywords__icontains=term) | \
+                Q(songs__icontains=term)  # 収録曲での検索を追加
+
+            if query is None:
+                query = q
+            else:
+                query = query & q  # AND 条件でクエリを連結
+
+        albums = albums.filter(query) if query else albums
 
     return render(request, 'label_list/album_list.html', {'albums': albums, 'search_term': search_term})
 
