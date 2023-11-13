@@ -28,7 +28,7 @@ DEBUG = False
 #デプロイ時には、Falseに変えること。
 #開発時はTrue
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', '192.168.111.8']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'mylocalapp.dev','192.168.111.8']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'label_list',
     'import_export', 
+     'captcha',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media files (User-uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+#reCAPTCHA
+RECAPTCHA_PUBLIC_KEY = '6LecMA0pAAAAADRnp2XYaT0cTZl_ZVTBbCWeGjD-'
+RECAPTCHA_PRIVATE_KEY = '6LecMA0pAAAAAKd2-3rFqjmG5X-BOFRWm7hxrr0D'

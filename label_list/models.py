@@ -64,3 +64,13 @@ class NewsPost(models.Model):
 
     def __str__(self):
         return self.title
+    
+#Review機能
+class Review(models.Model):
+    album = models.ForeignKey('Album', on_delete=models.CASCADE, related_name='reviews')
+    reviewer_name = models.CharField(max_length=10, blank=True)
+    text = models.TextField(max_length=2000)
+    created_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Review by {self.reviewer_name} on {self.album}"

@@ -6,6 +6,8 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import Artist, Format, Label, Album
 from .models import NewsPost
+from .models import Review
+
 
 @admin.register(Artist)
 class ArtistAdmin(ImportExportModelAdmin):
@@ -28,3 +30,11 @@ class NewsPostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'text']  # 検索フィールド
 
 admin.site.register(NewsPost, NewsPostAdmin)
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('album', 'reviewer_name', 'created_date')
+    list_filter = ('created_date',)
+    search_fields = ('album__title', 'reviewer_name')
+

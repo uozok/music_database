@@ -49,6 +49,7 @@
     <p><strong>クレジット:</strong> {% if album.credits %}{{ album.credits }}{% else %}N/A{% endif %}</p>
     <p><strong>備考:</strong> {{ album.notes }}</p>
     <hr>
+    <h4>ストリーミング</h4>
     {% if album.youtube_url %}
     <p><strong>YouTube:</strong> <a href="{{ album.youtube_url }}" target="_blank">Click Here for YouTube</a></p>
     {% endif %}
@@ -68,5 +69,45 @@
     <a href="{% url 'album_list' %}?search={{ search_term|urlencode }}">BACK</a>
   </div>
 
+  <hr>
+  <b></b><h4>レビュー</h4></div>
+<!-- 投稿されたレビューの表示 -->
+<!-- レビュー投稿フォーム -->
+<div class="review-form">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- このコードでフォームの全フィールドをレンダリング -->
+    <button type="submit">Submit Review</button>
+  </form>
 </div>
+
+<hr>
+
+<!-- 投稿されたレビューの表示 -->
+<div class="reviews">
+  {% for review in reviews %}
+    <div class="review">
+      <p><strong>{{ review.reviewer_name }}</strong> ({{ review.created_date|date:"Y-m-d H:i" }})</p>
+      <div class="review-text">{{ review.text }}</div> <!-- CSSクラスを適用 -->
+    </div>
+  {% empty %}
+    <p>No reviews yet.</p>
+  {% endfor %}
+</div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var textareas = document.querySelectorAll('textarea');
+
+  textareas.forEach(function(textarea) {
+      textarea.addEventListener('input', function() {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+      });
+  });
+});
+</script>
+
 {% endblock %}
