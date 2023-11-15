@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,5 +139,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 #reCAPTCHA
-RECAPTCHA_PUBLIC_KEY = '6LecMA0pAAAAADRnp2XYaT0cTZl_ZVTBbCWeGjD-'
-RECAPTCHA_PRIVATE_KEY = '6LecMA0pAAAAAKd2-3rFqjmG5X-BOFRWm7hxrr0D'
+RECAPTCHA_PUBLIC_KEY = '6LegMw4pAAAAAEOrhV3yzCvDzQg7-ygDQw3_7-Tn'
+#RECAPTCHA_PRIVATE_KEY = ''
+
+#デプロイ時は下記に変更し上記privateKeyを削除
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+
