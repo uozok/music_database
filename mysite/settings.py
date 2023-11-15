@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'label_list',
-    'import_export', 
+    'import_export',
      'captcha',
 ]
 
@@ -137,6 +137,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-#reCAPTCHA
-RECAPTCHA_PUBLIC_KEY = '6LecMA0pAAAAADRnp2XYaT0cTZl_ZVTBbCWeGjD-'
-RECAPTCHA_PRIVATE_KEY = '6LecMA0pAAAAAKd2-3rFqjmG5X-BOFRWm7hxrr0D'
+#reCAPTCHA　編集
+RECAPTCHA_PUBLIC_KEY = '6LegMw4pAAAAAEOrhV3yzCvDzQg7-ygDQw3_7-Tn'
+RECAPTCHA_PRIVATE_KEY = '6LegMw4pAAAAAMIRutEgPMHGx7ZrmZ-uG7zd_f4a'
