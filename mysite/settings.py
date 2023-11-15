@@ -140,8 +140,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 #reCAPTCHA
 RECAPTCHA_PUBLIC_KEY = '6LegMw4pAAAAAEOrhV3yzCvDzQg7-ygDQw3_7-Tn'
-#RECAPTCHA_PRIVATE_KEY = ''
-
-#デプロイ時は下記に変更し上記privateKeyを削除
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
-
