@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,5 +142,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # reCAPTCHA
 RECAPTCHA_PUBLIC_KEY = '6LegMw4pAAAAAEOrhV3yzCvDzQg7-ygDQw3_7-Tn'
 
-# デプロイ時はこの行を使用し、直接キーをコードに含めない
-RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+#デプロイ時はこの行を使用し、直接キーをコードに含めない
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+#RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
