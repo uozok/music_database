@@ -36,7 +36,15 @@ def album_list(request):
     else:
         albums = Album.objects.none()  # 検索語がない場合は何も取得しない
 
-    return render(request, 'label_list/album_list.html', {'albums': albums, 'search_term': search_term})
+ # セッションから最近訪れたアルバムを取得
+    recent_albums_ids = request.session.get('recent_albums', [])
+    recent_albums = Album.objects.filter(id__in=recent_albums_ids)
+
+    return render(request, 'label_list/album_list.html', {
+        'albums': albums, 
+        'search_term': search_term,
+        'recent_albums': recent_albums,# 追加
+        })
 
 
 #review追加
@@ -73,6 +81,14 @@ def album_detail(request, album_id):
         'meta_description': meta_description,
         'meta_image': meta_image,
     }
+
+    # 最近訪れたアルバムをセッションに保存
+    recent_albums = request.session.get('recent_albums', [])
+    if album_id not in recent_albums:
+        recent_albums.insert(0, album_id)
+        if len(recent_albums) > 5:  # 例えば、最新の5件を保持
+            recent_albums.pop()
+    request.session['recent_albums'] = recent_albums
 
     return render(request, 'label_list/album_detail.html', context)
 

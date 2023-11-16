@@ -82,4 +82,74 @@
         <div class="alert alert-info" style="border: none; background-color: transparent; font-weight: normal; color: gray;">Sorry, no results found...</div>
         {% endif %}
 </div>
+
+
+{% if recent_albums %}
+    <div class="container">
+<h4>最近閲覧したアルバム</h4>
+
+<!-- 最近閲覧したアルバム（モバイルビュー） -->
+<div class="d-md-none">
+    {% for album in recent_albums %}
+    <div class="media mb-3 recent-album-mobile">
+        {% if album.image %}
+            <img src="{{ album.image.url }}" alt="{{ album.title }}" class="mr-3 img-fluid album-table-image">
+        {% else %}
+            <div class="no-image">No Image</div>
+        {% endif %}
+        <div class="media-body">
+            <h5 class="mt-0"><a href="{% url 'album_detail' album.id %}">{{ album.title }}</a></h5>
+            <p>{{ album.artist.artist|default:"Unknown" }}</p>
+            <p>{{ album.release_date }}</p>
+            <p>{{ album.label.label|default:"Unknown" }}</p>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+
+<!-- 最近閲覧したアルバム（PCビュー） -->
+<div class="d-none d-md-block">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table recent-albums-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Catalog Number</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Format</th>
+                        <th scope="col">Release Date</th>
+                        <th scope="col">Label</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for album in recent_albums %}
+                    <tr class="album-table-row">
+                        <td>
+                            {% if album.image %}
+                                <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid album-table-image">
+                            {% else %}
+                                <div class="no-image">No Image</div>
+                            {% endif %}
+                        </td>
+                        <td>{{ album.catalog_number }}</td>
+                        <td>{{ album.artist.artist|default:"Unknown" }}</td>
+                        <td><a href="{% url 'album_detail' album.id %}">{{ album.title }}</a></td>
+                        <td>{{ album.format.format|default:"Unknown" }}</td>
+                        <td>{{ album.release_date }}</td>
+                        <td>{{ album.label.label|default:"Unknown" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+{% endif %}
+
 {% endblock %}
