@@ -1,7 +1,7 @@
 /* 既存のスタイル */
 
 .site-title {
-    background-color: white;
+    background-color: #343a40;
     color: white;
     padding: 5px 0;
     text-align: center;
@@ -231,9 +231,9 @@ textarea {
     background-color: #f2f2f2; /* ホバー時の背景色 */
 }
 
-/*サイトタイトル色、位置 */
+/*サイトタイトル色、位置  */
 .site-title {
-    padding-left: 5%; /* 左から10%のパディングを適用 */
+    padding-left: 5%; /* 左から10%のパディングを適用*/
     text-align: left;
     padding-bottom: 2px;
     padding-top: 0px;
@@ -241,7 +241,56 @@ textarea {
 }
 
 .site-title a {
-    color: #343a40;
+    color: white;
     text-decoration: none;
     font-size: 25pt;
+}
+
+
+/* フッターを下部に固定 */
+
+/* 共通のスタイル */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.site-content {
+    min-height: 100%;
+    padding-bottom: 120px; /* フッターの高さ分のパディングを追加 */
+    box-sizing: border-box;
+}
+
+.footer {
+    position: fixed; /* フッターを固定位置に設定 */
+    bottom: 0; /* 画面の最下部に配置 */
+    left: 0; /* 左端から配置 */
+    width: 100%; /* 幅を100%に設定 */
+    background-color: #343a40; /* フッターの背景色 */
+    color: white; /* フッターの文字色 */
+    text-align: center;
+    line-height: 120px; /* ラインの高さをフッターの高さに設定 */
+    padding: 10px 0; /* 上下のパディング */
+}
+
+/* フッターの項目のスタイル (PCビュー) */
+.footer .col-md-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+}
+
+/* スマートフォンビューでのフッターのスタイル調整 */
+@media (max-width: 768px) {
+    .footer .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .footer h5 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
