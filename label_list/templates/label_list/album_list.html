@@ -6,9 +6,8 @@
 
 <!-- site-title-containerをcontainerの外に移動 -->
 <div class="site-title-container">
-    <h1 class="mb-4 site-title"><a href="{% url 'album_list' %}" style="color: white; text-decoration: none;">Print Trax</a></h1>
+    <h1 class="mb-4 site-title"><a href="{% url 'album_list' %}">Print Trax</a></h1>
 </div>
-
 <div class="container mt-4">
     <form method="get" action="" class="form-inline mb-4">
         <input type="text" name="search" value="{{ search_term }}" class="form-control mr-2" placeholder="Artist,Title...">

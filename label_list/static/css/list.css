@@ -1,10 +1,12 @@
 /* 既存のスタイル */
+
 .site-title {
-    background-color: #343a40;
+    background-color: white;
     color: white;
-    padding: 10px 0;
+    padding: 5px 0;
     text-align: center;
 }
+/* background-color: #343a40 */
 
 .album-table-image {
     max-width: 100px;
@@ -227,4 +229,19 @@ textarea {
 /* 最近閲覧したアルバムのテーブル行にホバー効果を追加 */
 .recent-albums-table tbody tr:hover {
     background-color: #f2f2f2; /* ホバー時の背景色 */
+}
+
+/*サイトタイトル色、位置 */
+.site-title {
+    padding-left: 5%; /* 左から10%のパディングを適用 */
+    text-align: left;
+    padding-bottom: 2px;
+    padding-top: 0px;
+
+}
+
+.site-title a {
+    color: #343a40;
+    text-decoration: none;
+    font-size: 25pt;
 }
