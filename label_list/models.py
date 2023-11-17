@@ -45,8 +45,9 @@ class Album(models.Model):
     
 
     class Meta:
-        unique_together = ('catalog_number', 'label')  # 同じレーベル内で規格品番が重複しないようにします。
-
+       # unique_together = ('catalog_number', 'label')  # 同じレーベル内で規格品番が重複しないようにします。
+        pass
+    
     def __str__(self):
         return f"{self.catalog_number} - {self.artist.artist if self.artist else 'Unknown'} - {self.title}"
 
