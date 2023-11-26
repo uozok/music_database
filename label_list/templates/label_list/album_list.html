@@ -22,11 +22,13 @@
         <div class="d-md-none">
             {% for album in albums %}
             <div class="media mb-3">
+<!--
                 {% if album.image %}
                     <img src="{{ album.image.url }}" alt="{{ album.title }}" class="mr-3 img-fluid album-table-image">
                 {% else %}
                     <div class="no-image">No Image</div>
                 {% endif %}
+-->
                 <div class="media-body">
                     <h5 class="mt-0"> <a href="{% url 'album_detail' album.id %}?search={{ search_term|urlencode }}">{{ album.title }}</a>
                     <p>{{ album.artist.artist|default:"Unknown" }}</p>
@@ -51,17 +53,20 @@
                             <th scope="col">Format</th>
                             <th scope="col">Release Date</th>
                             <th scope="col">Label</th>
+                            <th scope="col">Genre</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for album in albums %}
                         <tr>
                             <td>
+                                <!--
                                 {% if album.image %}
                                     <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid album-table-image">
                                 {% else %}
                                     <div class="no-image">No Image</div>
                                 {% endif %}
+                                -->
                             </td>
                             <td>{{ album.catalog_number }}</td>
                             <td>{{ album.artist.artist|default:"Unknown" }}</td>
@@ -69,6 +74,7 @@
                             <td>{{ album.format.format|default:"Unknown" }}</td>
                             <td>{{ album.release_date }}</td>
                             <td>{{ album.label.label|default:"Unknown" }}</td>
+                            <td>{{ album.genre|default:"N/A" }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -91,16 +97,19 @@
 <div class="d-md-none">
     {% for album in recent_albums %}
     <div class="media mb-3 recent-album-mobile">
+        <!--
         {% if album.image %}
             <img src="{{ album.image.url }}" alt="{{ album.title }}" class="mr-3 img-fluid album-table-image">
         {% else %}
             <div class="no-image">No Image</div>
         {% endif %}
+        -->
         <div class="media-body">
             <h5 class="mt-0"><a href="{% url 'album_detail' album.id %}">{{ album.title }}</a></h5>
             <p>{{ album.artist.artist|default:"Unknown" }}</p>
             <p>{{ album.release_date }}</p>
             <p>{{ album.label.label|default:"Unknown" }}</p>
+            <p>Genre: {{ album.genre|default:"N/A" }}</p>
         </div>
     </div>
     <hr>

@@ -9,6 +9,9 @@ from .models import Album, NewsPost, Review
 from .forms import ReviewForm
 
 def album_list(request):
+
+  #  request.session.clear()
+
     if 'HTTP_REFERER' in request.META and '/album/' in request.META['HTTP_REFERER']:
         search_term = request.session.get('search_term', '')
     else:
@@ -37,6 +40,9 @@ def album_list(request):
         albums = Album.objects.none()  # 検索語がない場合は何も取得しない
 
  # セッションから最近訪れたアルバムを取得
+ #   recent_albums_ids = [id for id in request.session.get('recent_albums', []) if isinstance(id, int)]
+ #    recent_albums = Album.objects.filter(id__in=recent_albums_ids)
+
     recent_albums_ids = request.session.get('recent_albums', [])
     recent_albums = Album.objects.filter(id__in=recent_albums_ids)
 

@@ -21,17 +21,21 @@
   <div class="row">
     <!-- タイトルとアーティスト名 -->
     <div class="col-lg-6">
-      <h2>{{ album.title }}</h2>
+      <h2>"{{ album.title }}"</h2>
       <h3>{% if album.artist %}{{ album.artist.artist }}{% else %}'Unknown Artist'{% endif %}</h3>
+      <p></p>
+      <p><strong>ジャンル:</strong> {% if album.genre %}{{ album.genre }}{% else %}N/A{% endif %}</p>
     </div>
     
     <!-- 画像の表示 -->
     <div class="col-lg-6">
+      <!--
       {% if album.image %}
         <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid">
       {% else %}
         <div class="no-image">No Image Available</div>
       {% endif %}
+      -->
     </div>
   </div>
 
@@ -40,6 +44,7 @@
   <!-- 詳細情報 -->
   <div class="mt-4">
     <h4>詳細情報</h4>
+    <p></p>
     <p><strong>カタログ番号:</strong> {% if album.catalog_number %}{{ album.catalog_number }}{% else %}N/A{% endif %}</p>
     <p><strong>フォーマット:</strong> {% if album.format %}{{ album.format.format }}{% else %}N/A{% endif %}</p>
     <p><strong>発売日:</strong> {% if album.release_date %}{{ album.release_date }}{% else %}N/A{% endif %}</p>

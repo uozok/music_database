@@ -42,7 +42,7 @@ class Album(models.Model):
     tower_records_music_url = models.URLField(blank=True)
 
     image = models.ImageField(upload_to='album_images/', blank=True, null=True) # 新しい画像フィールドを追加
-    
+    genre = models.CharField(max_length=100, blank=True)  # ジャンルフィールドを追加
 
     class Meta:
        # unique_together = ('catalog_number', 'label')  # 同じレーベル内で規格品番が重複しないようにします。
