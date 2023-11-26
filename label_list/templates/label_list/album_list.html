@@ -46,7 +46,7 @@
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Image</th>
+                            <!-- <th scope="col">Image</th> -->
                             <th scope="col">Catalog Number</th>
                             <th scope="col">Artist</th>
                             <th scope="col">Title</th>
@@ -59,15 +59,15 @@
                     <tbody>
                         {% for album in albums %}
                         <tr>
-                            <td>
-                                <!--
+                             <!-- <td>
+                              
                                 {% if album.image %}
                                     <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid album-table-image">
                                 {% else %}
                                     <div class="no-image">No Image</div>
                                 {% endif %}
-                                -->
-                            </td>
+                                
+                            </td>-->
                             <td>{{ album.catalog_number }}</td>
                             <td>{{ album.artist.artist|default:"Unknown" }}</td>
                             <td><a href="{% url 'album_detail' album.id %}">{{ album.title }}</a></td>
@@ -123,31 +123,35 @@
             <table class="table recent-albums-table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Image</th>
+                      <!--  <th scope="col">Image</th>  -->
                         <th scope="col">Catalog Number</th>
                         <th scope="col">Artist</th>
                         <th scope="col">Title</th>
                         <th scope="col">Format</th>
                         <th scope="col">Release Date</th>
                         <th scope="col">Label</th>
+                        <th scope="col">Genre</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for album in recent_albums %}
                     <tr class="album-table-row">
-                        <td>
+                       <!-- <td>
+                            
                             {% if album.image %}
                                 <img src="{{ album.image.url }}" alt="{{ album.title }}" class="img-fluid album-table-image">
                             {% else %}
                                 <div class="no-image">No Image</div>
                             {% endif %}
-                        </td>
+                            
+                        </td> -->
                         <td>{{ album.catalog_number }}</td>
                         <td>{{ album.artist.artist|default:"Unknown" }}</td>
                         <td><a href="{% url 'album_detail' album.id %}">{{ album.title }}</a></td>
                         <td>{{ album.format.format|default:"Unknown" }}</td>
                         <td>{{ album.release_date }}</td>
                         <td>{{ album.label.label|default:"Unknown" }}</td>
+                        <td>Genre: {{ album.genre|default:"N/A" }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -158,6 +162,8 @@
 
 </div>
 </div>
+<div style="height: 50px;"></div>
+
 {% endif %}
 
 {% endblock %}
